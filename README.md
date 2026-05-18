@@ -6,9 +6,11 @@ WEEK 1
 
 Day 1 - Fundamentals of quantum mechanics (Javier)
 
-Day 2 - Fundamentals of solid-state physics (Javier) + Poster session & Flash talks 
+Day 2 - Morning: Fundamentals of solid-state physics (Javier) 
 
-Day 3 - Fundamentals of DFT (plane waves, Jupyter notebooks, QEpy, DFTpy) (Michele & Valeria & Ezekiel)
+Day 2 - Afternoon: Foundamentals of DFT 1 (functional derivatives, KS equations) (Michele & Valeria & Ezekiel) + Poster session & Flash talks 
+
+Day 3 - Fundamentals of DFT 2 (plane waves, DFTpy classes, implement your own SCF, FD distribution, KS Hamiltonian diagonalization, density mixing, QE in Python: QEpy) (Michele & Valeria & Ezekiel)
 
 Day 4 - Basis sets (atomic orbitals), pseudopotentials, SIESTA (Javier)
 
