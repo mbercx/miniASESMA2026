@@ -13,3 +13,30 @@
     register: qe_tools_install
     changed_when: "'Successfully installed' in qe_tools_install.stdout"
 
+  - name: Get VM architecture
+    ansible.builtin.command: uname -m
+    register: qm_arch
+    changed_when: false
+
+  - name: Download and extract VESTA to /opt
+    vars:
+      vesta_arch: "{{ 'arm64' if qm_arch.stdout == 'aarch64' else 'x86_64' }}"
+    ansible.builtin.unarchive:
+      src: "https://jp-minerals.org/vesta/archives/testing/VESTA-gtk3-{{ vesta_arch }}.tar.bz2"
+      dest: /opt/
+      remote_src: true
+      creates: "/opt/VESTA-gtk3-{{ vesta_arch }}/VESTA"
+    register: vesta_download
+    until: vesta_download is success
+    retries: 3
+    delay: 10
+
+  - name: Symlink VESTA into max's ~/.local/bin
+    vars:
+      vesta_arch: "{{ 'arm64' if qm_arch.stdout == 'aarch64' else 'x86_64' }}"
+    ansible.builtin.file:
+      src: "/opt/VESTA-gtk3-{{ vesta_arch }}/VESTA"
+      dest: /home/max/.local/bin/VESTA
+      state: link
+      owner: max
+
