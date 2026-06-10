@@ -1,0 +1,15 @@
+---
+- name: Apply post-distribution school updates
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: false
+  tasks:
+
+  - name: Install latest qe-tools pre-release into the asesma conda env
+    become_user: max
+    ansible.builtin.command:
+      cmd: ~/.conda/envs/asesma/bin/pip install --pre --upgrade qe-tools
+    register: qe_tools_install
+    changed_when: "'Successfully installed' in qe_tools_install.stdout"
+
